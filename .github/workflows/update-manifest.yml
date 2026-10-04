@@ -1,0 +1,44 @@
+name: Update plugin manifest
+
+on:
+  repository_dispatch:
+    types: [plugin-release]
+  schedule:
+    - cron: '17 6 * * 1' # Mondays at 06:17 UTC
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: update-plugin-manifest
+  cancel-in-progress: false
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          ref: ${{ github.event.repository.default_branch }}
+      - uses: actions/setup-python@ece7cb06caefa5fff74198d8649806c4678c61a1 # v6
+        with:
+          python-version: '3.12'
+      - name: Test synchronization
+        run: python -m unittest discover -s tests -v
+      - name: Synchronize stable releases
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: python scripts/update_manifest.py
+      - name: Commit manifest changes
+        run: |
+          if git diff --quiet -- manifest.json && [ -z "$(git ls-files --others --exclude-standard -- manifest.json)" ]; then
+            echo 'No manifest changes.'
+            exit 0
+          fi
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add manifest.json
+          git commit -m 'Update plugin repository manifest'
+          git push origin "HEAD:${{ github.event.repository.default_branch }}"

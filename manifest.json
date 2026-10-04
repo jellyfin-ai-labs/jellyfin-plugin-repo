@@ -1,0 +1,20 @@
+[
+  {
+    "guid": "0c8d1d43-0ad6-4d51-b5ac-b39b6f46fbcb",
+    "name": "Animated Album Art",
+    "description": "Discovers cover-motion.mp4/.mov sidecars in album folders and serves them as animated album artwork.\n",
+    "overview": "Animated album artwork for Jellyfin",
+    "owner": "jellyfin-ai-labs",
+    "category": "General",
+    "versions": [
+      {
+        "version": "0.1.0.0",
+        "changelog": "Initial release.\n",
+        "targetAbi": "12.1.0.0",
+        "sourceUrl": "https://github.com/jellyfin-ai-labs/animated-album-artwork/releases/download/v0.1.0.0/animated-album-art_0.1.0.0.zip",
+        "checksum": "17fb7de9950ff3470996fce557119ce3",
+        "timestamp": "2026-10-04T03:39:00Z"
+      }
+    ]
+  }
+]
