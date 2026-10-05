@@ -4,7 +4,7 @@
     "name": "Animated Album Art",
     "description": "Discovers cover-motion.mp4/.mov sidecars in album folders and serves them as animated album artwork.\n",
     "overview": "Animated album artwork for Jellyfin",
-    "owner": "jellyfin-ai-labs",
+    "owner": "reefside-ai-labs",
     "category": "General",
     "versions": [
       {
@@ -64,7 +64,7 @@
     "name": "Events",
     "description": "Highlight manually selected movies and episodes during annual or one-time date ranges. Includes administrator configuration and authenticated client APIs.\n",
     "overview": "Curated seasonal discovery events",
-    "owner": "jellyfin-ai-labs",
+    "owner": "reefside-ai-labs",
     "category": "General",
     "versions": [
       {

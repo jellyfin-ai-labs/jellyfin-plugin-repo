@@ -76,7 +76,14 @@ def synchronize(sources, existing):
                 # The publisher may still be building and uploading the assets.
                 print(f"Waiting for manifest.json: {repository} {release['tag_name']}")
                 continue
-            data = json.loads(download(manifests[0]))
+            manifest_url = manifests[0]
+            manifest_asset = next(asset for asset in release["assets"]
+                                  if asset["browser_download_url"] == manifest_url)
+            # Replacing an asset preserves its public URL but assigns a new ID.
+            # Avoid a cached copy of a manifest that was uploaded with --clobber.
+            if manifest_asset.get("id") is not None:
+                manifest_url += f"?asset_id={manifest_asset['id']}"
+            data = json.loads(download(manifest_url))
             if not isinstance(data, list) or len(data) != 1:
                 raise ValueError(f"Expected one plugin in {repository} release manifest")
             plugin = data[0]

@@ -1,16 +1,16 @@
 # Reefside AI Labs plugin repository
 
-One Jellyfin plugin catalog for plugins maintained by `jellyfin-ai-labs`.
+One Jellyfin plugin catalog for plugins maintained by `reefside-ai-labs`.
 `manifest.json` currently includes **Animated Album Art** and its published stable versions.
 The format follows [Jellyfin's plugin repository documentation](https://jellyfin.org/posts/plugin-updates/).
 
 ## Install in Jellyfin
 
-After publishing this repository as `jellyfin-ai-labs/jellyfin-plugin-repo` with a `main` branch,
+After publishing this repository as `reefside-ai-labs/jellyfin-plugin-repo` with a `main` branch,
 add this URL under **Dashboard → Plugins → Repositories**:
 
 ```text
-https://raw.githubusercontent.com/jellyfin-ai-labs/jellyfin-plugin-repo/main/manifest.json
+https://raw.githubusercontent.com/reefside-ai-labs/jellyfin-plugin-repo/main/manifest.json
 ```
 
 Install a compatible plugin from the catalog and restart Jellyfin. Animated Album Art's
@@ -65,14 +65,14 @@ Add the plugin's GitHub repository and stable GUID to `plugins.json`:
 
 ```json
 {
-  "repository": "jellyfin-ai-labs/another-plugin",
+  "repository": "reefside-ai-labs/another-plugin",
   "guid": "THE-GUID-FROM-THE-PLUGIN"
 }
 ```
 
 Each stable release must publish a `manifest.json` containing exactly one Jellyfin plugin
 entry with that GUID, plus the ZIP assets referenced by its versions. Animated Album Art's
-[publish workflow](https://github.com/jellyfin-ai-labs/animated-album-artwork/blob/master/.github/workflows/publish.yaml)
+[publish workflow](https://github.com/reefside-ai-labs/animated-album-artwork/blob/master/.github/workflows/publish.yaml)
 already produces these assets. Plugin identity and compatibility metadata come from each
 release's manifest rather than being duplicated here.
 

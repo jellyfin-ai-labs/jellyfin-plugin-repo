@@ -11,7 +11,7 @@ from scripts import update_manifest as sync
 
 
 GUID = "0c8d1d43-0ad6-4d51-b5ac-b39b6f46fbcb"
-SOURCE = {"repository": "jellyfin-ai-labs/animated-album-artwork", "guid": GUID}
+SOURCE = {"repository": "reefside-ai-labs/animated-album-artwork", "guid": GUID}
 ZIP = b"example plugin archive"
 
 
@@ -19,7 +19,7 @@ def fixture(version="0.1.0.0", release_id=1):
     base = f"https://github.com/{SOURCE['repository']}/releases/download/v{version}/"
     plugin = {
         "guid": GUID, "name": "Animated Album Art", "description": "Description",
-        "overview": "Overview", "owner": "jellyfin-ai-labs", "category": "General",
+        "overview": "Overview", "owner": "reefside-ai-labs", "category": "General",
         "versions": [{"version": version, "targetAbi": "12.1.0.0", "changelog": "Changes",
                       "timestamp": "2026-10-04T03:39:00Z", "sourceUrl": base + "plugin.zip",
                       "checksum": hashlib.md5(ZIP).hexdigest()}],
@@ -64,6 +64,47 @@ class SynchronizationTests(unittest.TestCase):
         del files[plugin["versions"][0]["sourceUrl"]]
         self.assertEqual(self.run_sync([release], files, [plugin]), [plugin])
 
+    def test_replaced_manifest_uses_current_asset_id(self):
+        plugin, release, files = fixture()
+        asset = release["assets"][0]
+        asset["id"] = 42
+        url = asset["browser_download_url"]
+        files[url + "?asset_id=42"] = files.pop(url)
+        self.assertEqual(self.run_sync([release], files), [plugin])
+
+    def test_accepts_renamed_repository_and_uses_current_asset_url(self):
+        plugin, release, files = fixture()
+        expected = copy.deepcopy(plugin)
+        release["html_url"] = (
+            "https://github.com/transferred-owner/animated-album-artwork/releases/tag/"
+            + release["tag_name"]
+        )
+        for asset in release["assets"]:
+            old_url = asset["browser_download_url"]
+            asset["browser_download_url"] = old_url.replace("reefside-ai-labs", "transferred-owner")
+            files[asset["browser_download_url"]] = files.pop(old_url)
+        expected["versions"][0]["sourceUrl"] = release["assets"][1]["browser_download_url"]
+        self.assertEqual(self.run_sync([release], files), [expected])
+
+    def test_repository_redirect_does_not_allow_other_release_or_asset(self):
+        for path in ("v9.0.0.0/plugin.zip", "v0.1.0.0/other.zip"):
+            with self.subTest(path=path):
+                plugin, release, files = fixture()
+                release["html_url"] = (
+                    "https://github.com/transferred-owner/animated-album-artwork/releases/tag/"
+                    + release["tag_name"]
+                )
+                for asset in release["assets"]:
+                    old_url = asset["browser_download_url"]
+                    asset["browser_download_url"] = old_url.replace("reefside-ai-labs", "transferred-owner")
+                    files[asset["browser_download_url"]] = files.pop(old_url)
+                plugin["versions"][0]["sourceUrl"] = (
+                    f"https://github.com/{SOURCE['repository']}/releases/download/{path}"
+                )
+                files[release["assets"][0]["browser_download_url"]] = json.dumps([plugin]).encode()
+                with self.assertRaisesRegex(ValueError, "same release"):
+                    self.run_sync([release], files)
+
     def test_rejects_wrong_identity_abi_url_and_checksum(self):
         for mutation in ("guid", "targetAbi", "sourceUrl", "checksum"):
             with self.subTest(mutation=mutation):
@@ -94,18 +135,18 @@ class SynchronizationTests(unittest.TestCase):
 
     def test_transferred_repository_imports_old_manifest_urls(self):
         plugin, release, files = fixture()
-        release["html_url"] = "https://github.com/reefside-ai-labs/animated-album-artwork/releases/tag/" + release["tag_name"]
+        release["html_url"] = "https://github.com/transferred-owner/animated-album-artwork/releases/tag/" + release["tag_name"]
         renamed_files = {}
         for asset in release["assets"]:
             old_url = asset["browser_download_url"]
-            asset["browser_download_url"] = old_url.replace("jellyfin-ai-labs", "reefside-ai-labs")
+            asset["browser_download_url"] = old_url.replace("reefside-ai-labs", "transferred-owner")
             renamed_files[asset["browser_download_url"]] = files[old_url]
         result = self.run_sync([release], renamed_files, [plugin])
         self.assertEqual(result[0]["versions"][0]["sourceUrl"], release["assets"][1]["browser_download_url"])
 
         for url in (
             plugin["versions"][0]["sourceUrl"].replace("v0.1.0.0", "v9.0.0.0"),
-            plugin["versions"][0]["sourceUrl"].replace("jellyfin-ai-labs", "unrelated-owner"),
+            plugin["versions"][0]["sourceUrl"].replace("reefside-ai-labs", "unrelated-owner"),
         ):
             with self.subTest(url=url):
                 invalid = copy.deepcopy(plugin)
@@ -126,7 +167,7 @@ class SynchronizationTests(unittest.TestCase):
         other["versions"][0]["sourceUrl"] = other_release["assets"][1]["browser_download_url"]
         other_files[other_release["assets"][0]["browser_download_url"]] = json.dumps([other]).encode()
         other_files[other["versions"][0]["sourceUrl"]] = ZIP
-        sources = [SOURCE, {"repository": "jellyfin-ai-labs/second-plugin", "guid": other["guid"]}]
+        sources = [SOURCE, {"repository": "reefside-ai-labs/second-plugin", "guid": other["guid"]}]
         with patch.object(sync, "get_releases", side_effect=[[release], [other_release]]), patch.object(
             sync, "download", side_effect=(files | other_files).__getitem__
         ):
