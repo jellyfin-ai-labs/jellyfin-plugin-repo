@@ -92,6 +92,28 @@ class SynchronizationTests(unittest.TestCase):
                     sync.main()
             self.assertEqual(manifest.read_text(), "[]\n")
 
+    def test_transferred_repository_imports_old_manifest_urls(self):
+        plugin, release, files = fixture()
+        release["html_url"] = "https://github.com/reefside-ai-labs/animated-album-artwork/releases/tag/" + release["tag_name"]
+        renamed_files = {}
+        for asset in release["assets"]:
+            old_url = asset["browser_download_url"]
+            asset["browser_download_url"] = old_url.replace("jellyfin-ai-labs", "reefside-ai-labs")
+            renamed_files[asset["browser_download_url"]] = files[old_url]
+        result = self.run_sync([release], renamed_files, [plugin])
+        self.assertEqual(result[0]["versions"][0]["sourceUrl"], release["assets"][1]["browser_download_url"])
+
+        for url in (
+            plugin["versions"][0]["sourceUrl"].replace("v0.1.0.0", "v9.0.0.0"),
+            plugin["versions"][0]["sourceUrl"].replace("jellyfin-ai-labs", "unrelated-owner"),
+        ):
+            with self.subTest(url=url):
+                invalid = copy.deepcopy(plugin)
+                invalid["versions"][0]["sourceUrl"] = url
+                renamed_files[release["assets"][0]["browser_download_url"]] = json.dumps([invalid]).encode()
+                with self.assertRaises(ValueError):
+                    self.run_sync([release], renamed_files)
+
     def test_syncs_multiple_configured_plugins(self):
         plugin, release, files = fixture()
         other = copy.deepcopy(plugin)

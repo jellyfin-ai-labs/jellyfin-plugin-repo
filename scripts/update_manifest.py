@@ -80,6 +80,18 @@ def synchronize(sources, existing):
             if not isinstance(data, list) or len(data) != 1:
                 raise ValueError(f"Expected one plugin in {repository} release manifest")
             plugin = data[0]
+            # GitHub redirects configured repositories after a rename or transfer.
+            # Older manifests retain the configured name, while the release API
+            # returns canonical URLs. Only rewrite that configured prefix; the
+            # exact release tag and asset name must still pass validation below.
+            original_prefix = f"https://github.com/{repository}/releases/download/"
+            release_url = release.get("html_url", "")
+            if "/releases/tag/" in release_url:
+                canonical_prefix = release_url.split("/releases/tag/", 1)[0] + "/releases/download/"
+                for version in plugin.get("versions", []):
+                    url = version.get("sourceUrl", "")
+                    if isinstance(url, str) and url.startswith(original_prefix):
+                        version["sourceUrl"] = canonical_prefix + url[len(original_prefix):]
             validate_plugin(plugin, guid, assets)
             previous = {version["version"]: version for version in plugins.get(guid, {}).get("versions", [])}
             for version in plugin["versions"]:
