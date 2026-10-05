@@ -2,5 +2,13 @@
   {
     "repository": "jellyfin-ai-labs/animated-album-artwork",
     "guid": "0c8d1d43-0ad6-4d51-b5ac-b39b6f46fbcb"
+  },
+  {
+    "repository": "reefside-ai-labs/events-plugin",
+    "guid": "74fd27c8-721c-462b-a5f8-356cc7e01d62"
+  },
+  {
+    "repository": "reefside-ai-labs/enhanced-lyrics-plugin",
+    "guid": "08c641eb-0fb9-47c7-9dc1-08615b8d220b"
   }
 ]
