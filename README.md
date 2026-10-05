@@ -1,4 +1,4 @@
-# Jellyfin AI Labs plugin repository
+# Reefside AI Labs plugin repository
 
 One Jellyfin plugin catalog for plugins maintained by `jellyfin-ai-labs`.
 `manifest.json` currently includes **Animated Album Art** and its published stable versions.
