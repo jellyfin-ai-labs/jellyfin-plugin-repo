@@ -62,8 +62,8 @@
         "changelog": "Refresh release metadata and packaging for the Reefside AI Labs plugin catalog.\n",
         "targetAbi": "12.1.0.0",
         "sourceUrl": "https://github.com/reefside-ai-labs/enhanced-lyrics-plugin/releases/download/v0.1.1/enhanced-lyrics_0.1.1.0.zip",
-        "checksum": "f29f69290693f7dad8ff43fc581caf38",
-        "timestamp": "2026-10-05T22:45:31Z"
+        "checksum": "f624dd4b3c04f2c407f566b4aaeb92e9",
+        "timestamp": "2026-10-05T22:47:25Z"
       },
       {
         "version": "0.1.0.0",
