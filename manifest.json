@@ -11,7 +11,7 @@
         "version": "0.1.3.0",
         "changelog": "Generate smaller H.264 playback copies in Jellyfin's cache without changing original artwork. Add bounded background conversion, cache limits and a preparation task. Preserve authenticated ranges and pin playback revisions.\n",
         "targetAbi": "12.1.0.0",
-        "sourceUrl": "https://github.com/jellyfin-ai-labs/animated-album-artwork/releases/download/v0.1.3/animated-album-art_0.1.3.0.zip",
+        "sourceUrl": "https://github.com/reefside-ai-labs/animated-album-artwork/releases/download/v0.1.3/animated-album-art_0.1.3.0.zip",
         "checksum": "91ef06eed337fb016a78c73c634fe20f",
         "timestamp": "2026-10-04T05:45:55Z"
       },
@@ -19,7 +19,7 @@
         "version": "0.1.2.0",
         "changelog": "Stream fragmented MP4/MOV artwork with header-authenticated byte ranges. Normalize timestamp offsets and repeated initialization sections, preserve looping after buffer eviction, and reduce startup downloads for large files.\n",
         "targetAbi": "12.1.0.0",
-        "sourceUrl": "https://github.com/jellyfin-ai-labs/animated-album-artwork/releases/download/v0.1.2/animated-album-art_0.1.2.0.zip",
+        "sourceUrl": "https://github.com/reefside-ai-labs/animated-album-artwork/releases/download/v0.1.2/animated-album-art_0.1.2.0.zip",
         "checksum": "ff1fc34204f50577ef2c601ccba63020",
         "timestamp": "2026-10-04T04:53:34Z"
       },
@@ -27,7 +27,7 @@
         "version": "0.1.1.0",
         "changelog": "Start MP4/MOV artwork playback using header-authenticated byte ranges and Media Source Extensions. Bound playback buffering and preserve static and full-download compatibility fallbacks. No API keys in playback URLs.\n",
         "targetAbi": "12.1.0.0",
-        "sourceUrl": "https://github.com/jellyfin-ai-labs/animated-album-artwork/releases/download/v0.1.1/animated-album-art_0.1.1.0.zip",
+        "sourceUrl": "https://github.com/reefside-ai-labs/animated-album-artwork/releases/download/v0.1.1/animated-album-art_0.1.1.0.zip",
         "checksum": "e7532e2584d555b57b826fd18e58e751",
         "timestamp": "2026-10-04T04:18:54Z"
       },
@@ -35,9 +35,45 @@
         "version": "0.1.0.0",
         "changelog": "Initial release.\n",
         "targetAbi": "12.1.0.0",
-        "sourceUrl": "https://github.com/jellyfin-ai-labs/animated-album-artwork/releases/download/v0.1.0.0/animated-album-art_0.1.0.0.zip",
+        "sourceUrl": "https://github.com/reefside-ai-labs/animated-album-artwork/releases/download/v0.1.0.0/animated-album-art_0.1.0.0.zip",
         "checksum": "17fb7de9950ff3470996fce557119ce3",
         "timestamp": "2026-10-04T03:39:00Z"
+      }
+    ]
+  },
+  {
+    "guid": "08c641eb-0fb9-47c7-9dc1-08615b8d220b",
+    "name": "Enhanced Lyrics",
+    "description": "Replaces local lyric discovery and parsing with TTML, enhanced LRC, LRC and text support. Bundled Jellyfin Web integration adds word highlighting, smooth scrolling, click-to-seek and animated album-art backgrounds.\n",
+    "overview": "TTML and word-timed lyrics with an enhanced Jellyfin Web player",
+    "owner": "reefside-ai-labs",
+    "category": "General",
+    "versions": [
+      {
+        "version": "0.1.0.0",
+        "changelog": "Initial Jellyfin 12.1 release.\n",
+        "targetAbi": "12.1.0.0",
+        "sourceUrl": "https://github.com/reefside-ai-labs/enhanced-lyrics-plugin/releases/download/v0.1.0/enhanced-lyrics_0.1.0.0.zip",
+        "checksum": "14e49569e7e1d018da74439c8e5036d1",
+        "timestamp": "2026-10-05T22:34:27Z"
+      }
+    ]
+  },
+  {
+    "guid": "74fd27c8-721c-462b-a5f8-356cc7e01d62",
+    "name": "Events",
+    "description": "Highlight manually selected movies and episodes during annual or one-time date ranges. Includes administrator configuration and authenticated client APIs.\n",
+    "overview": "Curated seasonal discovery events",
+    "owner": "jellyfin-ai-labs",
+    "category": "General",
+    "versions": [
+      {
+        "version": "0.1.0.0",
+        "changelog": "Initial events plugin.",
+        "targetAbi": "12.1.0.0",
+        "sourceUrl": "https://github.com/reefside-ai-labs/events-plugin/releases/download/v0.1.0/events_0.1.0.0.zip",
+        "checksum": "8b8cb130a511a60078cf5e4b32095c87",
+        "timestamp": "2026-10-05T22:33:27Z"
       }
     ]
   }
