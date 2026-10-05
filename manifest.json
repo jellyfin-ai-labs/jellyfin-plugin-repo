@@ -8,6 +8,14 @@
     "category": "General",
     "versions": [
       {
+        "version": "0.1.4.0",
+        "changelog": "Refresh release metadata and packaging for the Reefside AI Labs plugin catalog.\n",
+        "targetAbi": "12.1.0.0",
+        "sourceUrl": "https://github.com/reefside-ai-labs/animated-album-artwork/releases/download/v0.1.4/animated-album-art_0.1.4.0.zip",
+        "checksum": "51916f6787e52bc4af4eed1e20f9f3fd",
+        "timestamp": "2026-10-05T22:45:29Z"
+      },
+      {
         "version": "0.1.3.0",
         "changelog": "Generate smaller H.264 playback copies in Jellyfin's cache without changing original artwork. Add bounded background conversion, cache limits and a preparation task. Preserve authenticated ranges and pin playback revisions.\n",
         "targetAbi": "12.1.0.0",
@@ -50,6 +58,14 @@
     "category": "General",
     "versions": [
       {
+        "version": "0.1.1.0",
+        "changelog": "Refresh release metadata and packaging for the Reefside AI Labs plugin catalog.\n",
+        "targetAbi": "12.1.0.0",
+        "sourceUrl": "https://github.com/reefside-ai-labs/enhanced-lyrics-plugin/releases/download/v0.1.1/enhanced-lyrics_0.1.1.0.zip",
+        "checksum": "f29f69290693f7dad8ff43fc581caf38",
+        "timestamp": "2026-10-05T22:45:31Z"
+      },
+      {
         "version": "0.1.0.0",
         "changelog": "Initial Jellyfin 12.1 release.\n",
         "targetAbi": "12.1.0.0",
@@ -67,6 +83,14 @@
     "owner": "reefside-ai-labs",
     "category": "General",
     "versions": [
+      {
+        "version": "0.1.1.0",
+        "changelog": "Refresh release metadata and packaging for the Reefside AI Labs plugin catalog.\n",
+        "targetAbi": "12.1.0.0",
+        "sourceUrl": "https://github.com/reefside-ai-labs/events-plugin/releases/download/v0.1.1/events_0.1.1.0.zip",
+        "checksum": "5603162b9007c45f284c26b4636d3620",
+        "timestamp": "2026-10-05T22:45:45Z"
+      },
       {
         "version": "0.1.0.0",
         "changelog": "Initial events plugin.",
