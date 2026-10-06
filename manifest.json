@@ -67,6 +67,14 @@
     "category": "General",
     "versions": [
       {
+        "version": "0.2.1.0",
+        "changelog": "Automatically install the Web loader through server response integration, without editing Web files or requiring a custom Docker image. Support base URLs, HEAD and cache/range requests, and existing manual loaders. Add cold catalog-install and cache-free playback release gates, including container recreation, disable and uninstall checks.\n",
+        "targetAbi": "12.1.0.0",
+        "sourceUrl": "https://github.com/reefside-ai-labs/enhanced-lyrics-plugin/releases/download/v0.2.1/enhanced-lyrics_0.2.1.0.zip",
+        "checksum": "c5bab8226d103c0fe89476403eeb747f",
+        "timestamp": "2026-10-06T02:58:36Z"
+      },
+      {
         "version": "0.2.0.0",
         "changelog": "Smooth word highlighting by reading the native local playback clock each frame, preserving transcoding offsets. Avoid redundant renderer ticks and add playback-clock regression tests and profiling tools.\n",
         "targetAbi": "12.1.0.0",
