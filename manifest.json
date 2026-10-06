@@ -67,6 +67,14 @@
     "category": "General",
     "versions": [
       {
+        "version": "0.2.2.0",
+        "changelog": "Fix lyric animation stutter when pausing, resuming or seeking. Send one complete playback snapshot per frame and synchronize word animations immediately after playback transitions. Preserve smooth animation during steady playback and follow playback speed changes.\n",
+        "targetAbi": "12.1.0.0",
+        "sourceUrl": "https://github.com/reefside-ai-labs/enhanced-lyrics-plugin/releases/download/v0.2.2/enhanced-lyrics_0.2.2.0.zip",
+        "checksum": "245eae52a539c3c99ef91ebc122930ac",
+        "timestamp": "2026-10-06T04:50:19Z"
+      },
+      {
         "version": "0.2.1.0",
         "changelog": "Automatically install the Web loader through server response integration, without editing Web files or requiring a custom Docker image. Support base URLs, HEAD and cache/range requests, and existing manual loaders. Add cold catalog-install and cache-free playback release gates, including container recreation, disable and uninstall checks.\n",
         "targetAbi": "12.1.0.0",
